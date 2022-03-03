@@ -10,7 +10,7 @@ import {
   HomeSharp as HomeSharpIcon
 } from '@mui/icons-material';
 
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const pages = ['Home Page', 'Products Cart'];
 
@@ -25,6 +25,11 @@ const Navbar = ({ cart}) => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+
+  const navigate = useNavigate();
+  const navigate_to_page = (page)=>{
+    return (page === 'Home Page') ? navigate('/') : navigate('/cart')
+  }
 
   return (
     <AppBar position="sticky" sx={{ height: { xs: 58, sm: 65 } }}>
@@ -74,7 +79,10 @@ const Navbar = ({ cart}) => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page} onClick={ ()=>{
+                  handleCloseNavMenu();
+                  navigate_to_page(page);
+                }>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
