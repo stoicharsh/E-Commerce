@@ -13,7 +13,7 @@ router.post("/generate-order", async (req, res) => {
         });
 
         const options = {
-            amount: parseInt(token.live.subtotal.raw, 10), // amount in smallest currency unit
+            amount: (parseInt(token.live.subtotal.raw, 10))*100, // amount in smallest currency unit
             currency: "USD",
             notes: {
                 name: `${userData.firstName} ${userData.lastName}`,
